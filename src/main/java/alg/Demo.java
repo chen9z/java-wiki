@@ -1,5 +1,7 @@
 package alg;
 
+import alg.array.SingleLink;
+
 /**
  * Created by chen on 2019/8/22.
  */

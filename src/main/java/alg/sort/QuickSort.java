@@ -1,4 +1,4 @@
-package alg;
+package alg.sort;
 
 public class QuickSort {
 

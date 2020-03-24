@@ -1,4 +1,4 @@
-package alg;
+package alg.array;
 
 /**
  * 数组实现循环队列

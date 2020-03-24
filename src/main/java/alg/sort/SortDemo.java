@@ -1,4 +1,4 @@
-package alg;
+package alg.sort;
 
 /**
  * 排序算法
