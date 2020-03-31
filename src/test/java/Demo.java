@@ -1,9 +1,8 @@
 import alg.Practice;
-import alg.thk.NQueenProblem;
+import alg.sort.QuickSort;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class Demo {
 
@@ -25,7 +24,11 @@ public class Demo {
 
     @Test
     public void func3() {
-        NQueenProblem nQueenProblem = new NQueenProblem();
-        nQueenProblem.solveNQ();
+//        NQueenProblem nQueenProblem = new NQueenProblem();
+//        nQueenProblem.solveNQ();
+        QuickSort quickSort = new QuickSort();
+        int[] nums=new int[]{3,4,5,1,2,6,10,89,67,63};
+        quickSort.Sort(nums);
+        System.out.println(Arrays.toString(nums));
     }
 }

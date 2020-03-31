@@ -1,41 +1,42 @@
 package alg.sort;
 
+/**
+ * Created by chen on 2020/3/31.
+ */
 public class QuickSort {
 
-    // 快速排序，a是数组，n表示数组的大小
-    public void quickSort(int[] a, int n) {
-        quickSortInternally(a, 0, n-1);
+    public int[] Sort(int[] nums) {
+        quickSort(nums,0,nums.length-1);
+        return nums;
     }
 
-    // 快速排序递归函数，p,r为下标
-    private  void quickSortInternally(int[] a, int p, int r) {
-        if (p >= r) return;
-
-        int q = partition(a, p, r); // 获取分区点
-        quickSortInternally(a, p, q-1);
-        quickSortInternally(a, q+1, r);
+    private void quickSort(int[] nums, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int p = partition(nums, start, end);
+        quickSort(nums, start, p-1);
+        quickSort(nums, p + 1, end);
     }
 
-    private  int partition(int[] a, int p, int r) {
-        int pivot = a[r];
-        int i = p;
-        for(int j = p; j < r; ++j) {
-            if (a[j] < pivot) {
-                if (i == j) {
-                    ++i;
-                } else {
-                    int tmp = a[i];
-                    a[i++] = a[j];
-                    a[j] = tmp;
+    private int partition(int[] nums, int start, int end) {
+        int partValue = nums[end];
+        int i=start;
+        for (int j = start; j <end; j++) {
+            if (nums[j] <partValue) {
+                if (i != j) {
+                    int tem = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = tem;
                 }
+                i++;
             }
         }
-
-        int tmp = a[i];
-        a[i] = a[r];
-        a[r] = tmp;
-
-        System.out.println("i=" + i);
+        int tem = nums[i];
+        nums[i] = partValue;
+        nums[end]=tem;
         return i;
     }
+
+
 }
