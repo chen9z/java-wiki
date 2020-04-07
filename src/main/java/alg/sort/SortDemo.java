@@ -16,16 +16,13 @@ public class SortDemo {
 
         int len = items.length;
         for (int i = 0; i < len; i++) {
-            boolean flag = false;
             for (int j = 0; j < len - i - 1; j++) {
                 if (items[j] > items[j + 1]) {
                     int t = items[j];
                     items[j] = items[j + 1];
                     items[j + 1] = t;
-                    flag = true;
                 }
             }
-            if (flag = false) break;
         }
         return items;
     }
