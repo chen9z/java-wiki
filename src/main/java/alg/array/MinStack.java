@@ -1,4 +1,4 @@
-package alg;
+package alg.array;
 
 import java.util.Stack;
 

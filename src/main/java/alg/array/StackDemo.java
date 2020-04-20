@@ -1,4 +1,4 @@
-package alg;
+package alg.array;
 
 /**
  * 自己实现的栈

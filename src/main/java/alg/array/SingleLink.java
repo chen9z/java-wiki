@@ -1,4 +1,6 @@
-package alg;
+package alg.array;
+
+import alg.Node;
 
 /**
  * Created by chen on 2019/8/14.

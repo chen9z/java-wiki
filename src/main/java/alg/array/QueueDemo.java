@@ -1,4 +1,4 @@
-package alg;
+package alg.array;
 
 /**
  * 实现可以自动扩容的队列
