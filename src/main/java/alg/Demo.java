@@ -1,5 +1,7 @@
 package alg;
 
+import java.util.Arrays;
+
 /**
  * Created by chen on 2019/8/22.
  */
@@ -13,5 +15,23 @@ public class Demo {
         singleLink.deleteNode("3");
 
         singleLink.printAll();
+
+        String s = "ss";
+    }
+
+    public int minimumLengthEncoding(String[] words) {
+        int len=words.length;
+        String [] revWords=new String[len];
+        for(int i=0;i<len;i++){
+            revWords[i]=new StringBuilder(words[i]).reverse().toString();
+        }
+        Arrays.sort(revWords);
+        int res=0;
+        for(int i=0;i<len-1;i++){
+            if(!revWords[i+1].startsWith(revWords[i])){
+                res+=revWords[i].length()+1;
+            }
+        }
+        return res;
     }
 }
