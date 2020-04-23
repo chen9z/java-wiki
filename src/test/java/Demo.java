@@ -4,6 +4,8 @@ import alg.sort.SortDemo;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Vector;
+import java.util.concurrent.locks.Lock;
 
 public class Demo {
 
@@ -37,17 +39,42 @@ public class Demo {
     @Test
     public void func4() {
 
-        String ss = "3010100\n" +
-                "3010101\n" +
-                "3010102\n" +
-                "3010103\n" +
-                "3010104\n" +
-                "3010105\n" +
-                "3010106\n" +
-                "3010107\n" +
-                "3010108\n" +
-                "3010109\n";
-        System.out.println(String.join(",",ss.split("\\n")));
+        String ss = "[\"1010100\",\"1010101\",\"1010102\",\"1010103\",\"1011100\",\"1011101\",\"1011102\",\"1011103\",\"1011104\",\"1011105\",\"1011106\",\"1014100\",\"1014101\",\"1014102\",\"1014103\",\"1014104\",\"1014105\",\"1014106\",\"1014107\",\"1015100\",\"1015101\",\"1013100\",\"1013101\",\"1013102\",\"1013103\",\"1013104\",\"1013105\",\"1013106\"]";
+        System.out.println("");
     }
 
+    volatile int a;
+    @Test
+    public void func5() throws InterruptedException {
+        Practice practice = new Practice();
+        Thread thread1 = new Thread(()->{
+            a++;
+        });
+        Thread thread2=new Thread(()->{
+            System.out.println("线程中："+a);
+        });
+        thread1.start();
+        thread2.start();
+        System.out.println("主线程中："+a);
+    }
+
+    @Test
+    public void func6() {
+        Thread thread = Thread.currentThread();
+            while (true) {
+                if (thread.isInterrupted()) {
+                    break;
+                }
+                try {
+                    Thread.sleep(200);
+                    System.out.println("执行了");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+    }
+    @Test
+    public void func7() {
+        String ss = "今天真的是个www.2u2u2u-com-好天www-2u2u2u-com-气，天天学习，好好www-2u2u2u-com-向上，加油！www-2u2u2u-com-";
+    }
 }

@@ -2,10 +2,7 @@ package alg;
 
 import alg.array.SingleLink;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by chen on 2019/8/22.
@@ -54,5 +51,31 @@ public class Practice {
             n--;
         }
         return list.get(0);
+    }
+
+//    public String reverseWords(String s) {
+//        StringBuilder builder=new StringBuilder();
+//        char[] chars = s.toCharArray();
+//        int i=chars.length-1,j=i;
+//        while (i >=0) {
+//            if (chars[i] == ' ') {
+//                if (i!=j) {
+//                    builder.append(s, i+1, j+1).append(" ");
+//                    j=i;
+//                }
+//                i--;
+//                j--;
+//            }else {
+//                i--;
+//            }
+//        }
+//        return builder.toString().trim();
+//    }
+
+    public String reverseWords(String s) {
+        StringBuilder builder=new StringBuilder();
+        String[] chars = s.trim().split(" +");
+        Collections.reverse(Arrays.asList(chars));
+        return String.join(" ",chars);
     }
 }

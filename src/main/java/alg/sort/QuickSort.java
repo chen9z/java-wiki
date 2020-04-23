@@ -97,7 +97,7 @@ public class QuickSort {
     private void merge(int[] nums, int left, int end) {
         if(left>=end) return;
         int mid=(end+left)/2;
-        System.out.println(">>>>>mid:" + mid+":left"+left+":right:"+end);
+        System.out.println(">>>>>:left"+left+"mid:"+mid+":right:"+end);
         merge(nums, left, mid);
         merge(nums, mid + 1, end);
         mergeAll(nums, left, mid,end);
@@ -116,11 +116,13 @@ public class QuickSort {
                     i++;
                 }
             }
-            if (i >mid&&j<=end) {
+            System.out.println(">>>>>>>>>>>j:" + j);
+            System.out.println(">>>>>>>>>>>i："+i);
+            if (i >mid) {
                 array[k] = nums[j];
                 j++;
             }
-            if (j >end&&i<=mid) {
+            if (j >end) {
                 array[k] = nums[i];
                 i++;
             }
