@@ -10,7 +10,7 @@ public class VolatileTest {
     public volatile static AtomicInteger race=new AtomicInteger();
 
     public static void increase() {
-        race.incrementAndGet();
+        race.getAndIncrement();
     }
     public static final int THREADS_COUNT=20;
 

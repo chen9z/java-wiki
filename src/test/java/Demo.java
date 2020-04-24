@@ -3,8 +3,8 @@ import alg.sort.QuickSort;
 import alg.sort.SortDemo;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Vector;
+import java.util.*;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.locks.Lock;
 
 public class Demo {
@@ -38,9 +38,12 @@ public class Demo {
 
     @Test
     public void func4() {
+        Map map = new HashMap<String, Object>();
+        map.put(null, "1");
+        map.put("1", 2);
+        System.out.println(map.get(null));
+        System.out.println(map.get("1"));
 
-        String ss = "[\"1010100\",\"1010101\",\"1010102\",\"1010103\",\"1011100\",\"1011101\",\"1011102\",\"1011103\",\"1011104\",\"1011105\",\"1011106\",\"1014100\",\"1014101\",\"1014102\",\"1014103\",\"1014104\",\"1014105\",\"1014106\",\"1014107\",\"1015100\",\"1015101\",\"1013100\",\"1013101\",\"1013102\",\"1013103\",\"1013104\",\"1013105\",\"1013106\"]";
-        System.out.println("");
     }
 
     volatile int a;
@@ -72,9 +75,12 @@ public class Demo {
                     e.printStackTrace();
                 }
             }
+
     }
     @Test
     public void func7() {
         String ss = "今天真的是个www.2u2u2u-com-好天www-2u2u2u-com-气，天天学习，好好www-2u2u2u-com-向上，加油！www-2u2u2u-com-";
     }
+
+
 }
