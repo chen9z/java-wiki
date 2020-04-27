@@ -3,8 +3,10 @@ import alg.sort.QuickSort;
 import alg.sort.SortDemo;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Vector;
+import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
 public class Demo {
@@ -76,5 +78,20 @@ public class Demo {
     @Test
     public void func7() {
         String ss = "今天真的是个www.2u2u2u-com-好天www-2u2u2u-com-气，天天学习，好好www-2u2u2u-com-向上，加油！www-2u2u2u-com-";
+    }
+
+    @Test
+    public void func8() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("aa", 123);
+        map.put("bb", 321);
+        map.forEach((key,value)->{
+            System.out.println(key + ":" + value);
+        });
+    }
+
+    @Test
+    public void func9() {
+        ThreadPoolExecutor threadPoolExecutor=new ThreadPoolExecutor(4,8,10, TimeUnit.SECONDS,new ArrayBlockingQueue<>(3));
     }
 }
