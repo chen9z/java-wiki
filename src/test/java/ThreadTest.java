@@ -73,6 +73,7 @@ public class ThreadTest {
             Thread.sleep(3000);
             return 30;
         });
+
         Thread t3 = new Thread(ft3);
         t3.start();
 
