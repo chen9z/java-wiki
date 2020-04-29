@@ -77,6 +77,7 @@ public class ThreadTest {
         Thread t3 = new Thread(ft3);
         t3.start();
 
+
         Integer res = Integer.MAX_VALUE;
 //        while (ft1.get() != null && ft2.get() != null && ft3.get() != null) {
             res = Math.min(res, ft1.get());
