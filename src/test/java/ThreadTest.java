@@ -55,6 +55,7 @@ public class ThreadTest {
 
     @Test
     public void func4() throws ExecutionException, InterruptedException {
+        long start = System.currentTimeMillis();
         FutureTask<Integer> ft1 = new FutureTask<>(() -> {
             Thread.sleep(1000);
             return 34;
@@ -63,7 +64,7 @@ public class ThreadTest {
         t1.start();
 
         FutureTask<Integer> ft2 = new FutureTask<>(() -> {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
             return 35;
         });
         Thread t2 = new Thread(ft2);
@@ -85,5 +86,6 @@ public class ThreadTest {
             res = Math.min(res, ft3.get());
 //        }
         System.out.println(res);
+        System.out.println((System.currentTimeMillis()-start)/1000);
     }
 }
