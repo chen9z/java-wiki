@@ -3,6 +3,7 @@ import org.junit.Test;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Supplier;
 
 /**
  * Created by chen on 2020/4/28.
@@ -87,5 +88,76 @@ public class ThreadTest {
 //        }
         System.out.println(res);
         System.out.println((System.currentTimeMillis()-start)/1000);
+    }
+
+    @Test
+    public void func5(){
+        CompletableFuture<String> stringCompletableFuture =
+                CompletableFuture.supplyAsync(() -> "hello first")
+                .thenApply(s -> s + " second")
+                .thenApply(s -> s + " third");
+        System.out.println(stringCompletableFuture.join());
+    }
+    @Test
+    public void func6() {
+        CompletableFuture<Integer> f1 = CompletableFuture.supplyAsync(() -> {
+            int t = ThreadLocalRandom.current().nextInt(5, 10);
+            try {
+                Thread.sleep(t*1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return t;
+        });
+
+        CompletableFuture<Integer> f2 = CompletableFuture.supplyAsync(() -> {
+            int t = ThreadLocalRandom.current().nextInt(5, 9);
+            try {
+                Thread.sleep(t * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return t;
+        });
+
+        CompletableFuture<Integer> f3 = f1.applyToEither(f2, s -> s);
+        System.out.println(f3.join());
+    }
+
+    @Test
+    public void func7() {
+        CompletableFuture<Boolean> f =
+                CompletableFuture.supplyAsync(() -> 7 / 1).thenApply(a->7==7).exceptionally(e->false);
+        System.out.println(f.join());
+    }
+
+    @Test
+    public void func8() {
+        CompletableFuture<Void> f1 = CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("烧好水了");
+        });
+
+        CompletableFuture<Void> f2 = CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("洗好碗了");
+        });
+//        CompletableFuture<String> f3 = f1.thenCombine(f2, (__, tf) -> {
+//            System.out.println("烧好茶了");
+//            return "烧好茶了";
+//        });
+//        System.out.println(f3.join());
+        CompletableFuture<Void> f3 = f1.runAfterBoth(f2, () -> {
+            System.out.println("烧茶了");
+        });
+        f3.join();
     }
 }
