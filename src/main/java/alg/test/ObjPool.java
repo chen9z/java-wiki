@@ -15,7 +15,7 @@ public class ObjPool<T, R> {
 
     final Semaphore semaphore;
 
-    public ObjPool(int size, T t) {
+    public  ObjPool(int size, T t) {
         pool = new Vector<>(size);
         for (int i = 0; i < size; i++) {
             pool.add(t);

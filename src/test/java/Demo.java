@@ -4,10 +4,8 @@ import alg.sort.SortDemo;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
+import java.util.concurrent.*;
+import java.util.concurrent.locks.*;
 
 public class Demo {
 
@@ -74,6 +72,7 @@ public class Demo {
                     e.printStackTrace();
                 }
             }
+
     }
     @Test
     public void func7() {
@@ -89,10 +88,83 @@ public class Demo {
             System.out.println(key + ":" + value);
         });
     }
-
     @Test
     public void func9() {
 
         ThreadPoolExecutor threadPoolExecutor=new ThreadPoolExecutor(4,8,10, TimeUnit.SECONDS,new ArrayBlockingQueue<>(3));
+    }
+
+    @Test
+    public void func10() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println(ThreadLocalRandom.current().nextInt(0, 100));
+        }
+
+        Lock lock = new ReentrantLock();
+        Condition condition = lock.newCondition();
+        condition.signalAll();
+
+        Semaphore semaphore = new Semaphore(20);
+
+        ReadWriteLock readWriteLock=new ReentrantReadWriteLock();
+
+    }
+
+    int k=0;
+    @Test
+    public void func11() throws Exception{
+        CountDownLatch countDownLatch = new CountDownLatch(2);
+        Executor executor = Executors.newFixedThreadPool(2);
+        Thread t1=new Thread(()->{
+            k++;
+            countDownLatch.countDown();
+        });
+        Thread t2 = new Thread(()->{
+            k++;
+            countDownLatch.countDown();
+        });
+        executor.execute(t1);
+        executor.execute(t2);
+        countDownLatch.await();
+        System.out.println(k);
+    }
+
+    @Test
+    public void func12() throws InterruptedException {
+        Queue<Integer> a = new LinkedList<>();
+        Queue<Integer> b = new LinkedList<>();
+
+        for (int i = 0; i < 10; i++) {
+            a.add(i);
+            b.add(i);
+        }
+
+        CyclicBarrier barrier = new CyclicBarrier(2,()->{
+            System.out.println(a.poll() + b.poll());
+        });
+
+        Thread t1=new Thread(()->{
+            while (!a.isEmpty()) {
+                try {
+                    barrier.await();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Thread t2=new Thread(()->{
+            while (!b.isEmpty()) {
+                try {
+                    barrier.await();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
     }
 }

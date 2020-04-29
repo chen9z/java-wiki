@@ -1,5 +1,8 @@
 package alg.test;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -12,26 +15,15 @@ public class LockTest {
     private static final Lock lock = new ReentrantLock();
 
 
-
     private static int value;
 
     public static void increase() {
-
         lock.lock();
-        value++;
-        lock.unlock();
-//        try {
-//            value++;
-//        }finally {
-//            lock.unlock();
-//        }
-//        if (lock.tryLock()) {
-//            try {
-//                value++;
-//            }finally {
-//                lock.unlock();
-//            }
-//        }
+        try {
+            value++;
+        }finally {
+            lock.unlock();
+        }
     }
 
     public static void main(String[] args) {
