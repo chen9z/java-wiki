@@ -1,9 +1,9 @@
+import alg.test.FutureTaskTest;
 import org.junit.Test;
 
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Supplier;
 
 /**
  * Created by chen on 2020/4/28.
@@ -29,7 +29,7 @@ public class ThreadTest {
             }
         });
 
-        for (int i = 0; i <100; i++) {
+        for (int i = 0; i < 100; i++) {
             poolExecutor.execute(() -> {
                 try {
                     Thread.sleep(1000);
@@ -82,28 +82,29 @@ public class ThreadTest {
 
         Integer res = Integer.MAX_VALUE;
 //        while (ft1.get() != null && ft2.get() != null && ft3.get() != null) {
-            res = Math.min(res, ft1.get());
-            res = Math.min(res, ft2.get());
-            res = Math.min(res, ft3.get());
+        res = Math.min(res, ft1.get());
+        res = Math.min(res, ft2.get());
+        res = Math.min(res, ft3.get());
 //        }
         System.out.println(res);
-        System.out.println((System.currentTimeMillis()-start)/1000);
+        System.out.println((System.currentTimeMillis() - start) / 1000);
     }
 
     @Test
-    public void func5(){
+    public void func5() {
         CompletableFuture<String> stringCompletableFuture =
                 CompletableFuture.supplyAsync(() -> "hello first")
-                .thenApply(s -> s + " second")
-                .thenApply(s -> s + " third");
+                        .thenApply(s -> s + " second")
+                        .thenApply(s -> s + " third");
         System.out.println(stringCompletableFuture.join());
     }
+
     @Test
     public void func6() {
         CompletableFuture<Integer> f1 = CompletableFuture.supplyAsync(() -> {
             int t = ThreadLocalRandom.current().nextInt(5, 10);
             try {
-                Thread.sleep(t*1000);
+                Thread.sleep(t * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -127,7 +128,7 @@ public class ThreadTest {
     @Test
     public void func7() {
         CompletableFuture<Boolean> f =
-                CompletableFuture.supplyAsync(() -> 7 / 1).thenApply(a->7==7).exceptionally(e->false);
+                CompletableFuture.supplyAsync(() -> 7 / 1).thenApply(a -> 7 == 7).exceptionally(e -> false);
         System.out.println(f.join());
     }
 
@@ -160,4 +161,100 @@ public class ThreadTest {
         });
         f3.join();
     }
+
+    @Test
+    public void func9() throws InterruptedException {
+        ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(3);
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+        executorService.submit(() -> {
+            try {
+                Thread.sleep(2000);
+                queue.put(34);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        executorService.submit(() -> {
+            try {
+                Thread.sleep(3000);
+                queue.put(39);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        executorService.submit(() -> {
+            try {
+                Thread.sleep(1000);
+                queue.put(45);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        for (int i = 0; i < 3; i++) {
+            System.out.println(queue.take());
+        }
+    }
+
+    @Test
+    public void func10() throws InterruptedException, ExecutionException {
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+        CompletionService<Integer> completionService = new ExecutorCompletionService<>(executorService);
+
+        completionService.submit(()->{
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 34;
+        });
+        completionService.submit(()->{
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 35;
+        });
+        completionService.submit(()->{
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 40;
+        });
+        CountDownLatch countDownLatch = new CountDownLatch(3);
+        AtomicInteger atomicInteger = new AtomicInteger(Integer.MAX_VALUE);
+        for (int i = 0; i < 3; i++) {
+            Integer newValue = completionService.take().get();
+            executorService.submit(()->{
+                try {
+                    atomicInteger.getAndUpdate(operand -> Math.min(operand,newValue));
+                    countDownLatch.countDown();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            });
+        }
+        countDownLatch.await();
+        System.out.println(atomicInteger.get());
+    }
+
+    @Test
+    public void func11() throws Exception{
+        FutureTaskTest futureTaskTest = new FutureTaskTest();
+        System.out.println(futureTaskTest.getData());
+    }
+
+    @Test
+    public void func12() {
+    }
+
 }
