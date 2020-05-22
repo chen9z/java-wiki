@@ -3,6 +3,13 @@ package alg;
 import alg.array.SingleLink;
 
 import java.util.*;
+import java.lang.String;
+import java.sql.*;
+import java.io.*;
+import java.nio.*;
+import java.util.concurrent.*;
+import java.util.concurrent.locks.AbstractOwnableSynchronizer;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by chen on 2019/8/22.
@@ -77,5 +84,22 @@ public class Practice {
         String[] chars = s.trim().split(" +");
         Collections.reverse(Arrays.asList(chars));
         return String.join(" ",chars);
+    }
+
+    public synchronized int lengthOfLongestSubstring(String s) {
+        int length=s.length();
+        if(length<=1) return length;
+        int j=0,max=0;
+        Map<Character,Integer> map=new HashMap<>();
+        for(int i=0;i<length;i++){
+            if(map.containsKey(s.charAt(i))){
+                max=Math.max(max,i-j);
+                j = Math.max(map.get(s.charAt(i)) + 1, j);
+                System.out.println("j:"+j);
+            }
+            map.put(s.charAt(i),i);
+        }
+        max=Math.max(max,length-j);
+        return max;
     }
 }

@@ -72,11 +72,12 @@ public class Demo {
                     e.printStackTrace();
                 }
             }
-
     }
     @Test
     public void func7() {
         String ss = "今天真的是个www.2u2u2u-com-好天www-2u2u2u-com-气，天天学习，好好www-2u2u2u-com-向上，加油！www-2u2u2u-com-";
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuffer buffer = new StringBuffer();
     }
 
     @Test
