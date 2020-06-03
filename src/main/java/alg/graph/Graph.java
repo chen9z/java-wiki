@@ -53,6 +53,35 @@ public class Graph {
         }
     }
 
+    boolean found=false;
+
+    public void dfs(int s, int t) {
+        found=false;
+        boolean[] visited = new boolean[v];
+        visited[s]=true;
+
+        int[] prev=new int[v];
+        recurDfs(s, t, visited, prev);
+        print(prev, s, t);
+
+    }
+
+    private void recurDfs(int s, int t, boolean[] visited, int[] prev) {
+        if(found) return;
+        if (s == t) {
+            found=true;
+            return;
+        }
+        for (int i = 0; i < link[s].size(); i++) {
+            int q = link[s].get(i);
+            if (!visited[q]) {
+                prev[q]=s;
+                recurDfs(q, t, visited, prev);
+            }
+        }
+
+    }
+
     private void print(int[] prev, int s, int t) { // 递归打印s->t的路径
         if (prev[t] != -1 && t != s) {
             print(prev, s, prev[t]);

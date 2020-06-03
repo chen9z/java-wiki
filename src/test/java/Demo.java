@@ -1,4 +1,5 @@
 import alg.Practice;
+import alg.array.QuickSort1;
 import alg.sort.QuickSort;
 import alg.sort.SortDemo;
 import org.junit.Test;
@@ -12,9 +13,9 @@ public class Demo {
 
     @Test
     public void func1() {
-        QuickSort sortDemo = new QuickSort();
+        QuickSort1 sortDemo = new QuickSort1();
         int[] n1 = new int[]{1, 3, 4, 9, 10, 2, 0, 10, 3};
-        System.out.println(Arrays.toString(sortDemo.mergeSort(n1)));
+        System.out.println(Arrays.toString(sortDemo.getLeastNumbers(n1,5)));
     }
 
     @Test
@@ -168,4 +169,5 @@ public class Demo {
         t1.join();
         t2.join();
     }
+
 }

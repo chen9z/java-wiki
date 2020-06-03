@@ -2,6 +2,7 @@ package alg;
 
 import alg.array.SingleLink;
 
+import javax.swing.tree.TreeNode;
 import java.util.*;
 import java.lang.String;
 import java.sql.*;
@@ -101,5 +102,111 @@ public class Practice {
         }
         max=Math.max(max,length-j);
         return max;
+    }
+
+//    public int findDuplicate(int[] nums) {
+//        int pos=0;
+//        boolean b=false;
+//        while(!b){
+//            for(int i=pos+1;i<nums.length;i++){
+//                if(nums[pos]==nums[i]){
+//                    System.out.println("pos:"+pos+" i:"+i);
+//                    b=true;
+//                    break;
+//                }
+//            }
+//            pos++;
+//        }
+//        return nums[pos-1];
+//    }
+
+    public int findDuplicate(int[] nums) {
+        int slow = 0, fast = 0;
+        do {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        } while (slow != fast);
+        slow = 0;
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
+    }
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int len1=nums1.length;
+        int len2=nums2.length;
+        int left=(len1+len2+1)/2;
+        int right=(len1+len2+2)/2;
+        return (cal(nums1,0,nums2,0,left)+cal(nums1,0,nums2,0,right))/2.0;
+    }
+
+    public int cal(int[] nums1,int i,int[] nums2,int j,int k){
+        if(i==nums1.length) return nums2[j+k-1];
+        if(j==nums2.length) return nums1[i+k-1];
+        if(k==1){
+            return Math.min(nums1[i],nums2[j]);
+        }
+        int midVal1=(i+k/2-1<nums1.length)?nums1[i+k/2-1]:Integer.MAX_VALUE;
+        int midVal2=(j+k/2-1<nums2.length)?nums2[j+k/2-1]:Integer.MAX_VALUE;
+        if (midVal1 < midVal2) {
+            return cal(nums1,i+k/2,nums2,j,k-k/2);
+        }else {
+            return cal(nums1,i,nums2,j+k/2,k-k/2);
+        }
+    }
+
+    public String convert(String s, int numRows) {
+        List<StringBuilder> list=new ArrayList<>();
+        for(int i=0;i<numRows;i++){
+            list.add(new StringBuilder());
+        }
+
+        int dp=2*numRows-2;
+        for(int i=0;i<s.length();i++){
+            int n=(i)%dp;
+            if(n<numRows){
+                list.get(n).append(s.charAt(i));
+            }else {
+                list.get(2*numRows-n-2).append(s.charAt(i));
+            }
+        }
+        StringBuilder builder=new StringBuilder("");
+        for(int i=0;i<numRows;i++){
+            System.out.println(list.get(i).toString());
+            builder.append(list.get(i));
+        }
+        return builder.toString();
+    }
+
+    public int reverse(int x) {
+        StringBuilder builder=new StringBuilder();
+        try {
+            if(x>=0){
+                return Integer.parseInt(builder.append(x).reverse().toString());
+            }else{
+                return -Integer.parseInt(builder.append(-x).reverse().toString());
+            }
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public boolean isValid(String s) {
+        Stack<Integer> ss = new Stack<>();
+
+        Deque<Character> stack=new ArrayDeque<>();
+        for (Character chr : s.toCharArray()){
+            if('('==chr||'['==chr||'{'==chr){
+                stack.push(chr);
+            }else{
+                Character left=stack.poll();
+                if((chr==')'&&'('!=left)||(chr=='}'&&'{'!=left)||(chr==']'&&'['!=left)){
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
     }
 }

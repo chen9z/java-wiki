@@ -5,9 +5,7 @@ import org.junit.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -51,7 +49,6 @@ public class Demo1 {
     @Test
     public void func4() {
         Practice practice = new Practice();
-
-        System.out.println(practice.lengthOfLongestSubstring("abba"));
+        System.out.println(practice.isValid("]"));
     }
 }
