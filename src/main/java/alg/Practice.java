@@ -177,6 +177,7 @@ public class Practice {
             System.out.println(list.get(i).toString());
             builder.append(list.get(i));
         }
+
         return builder.toString();
     }
 
