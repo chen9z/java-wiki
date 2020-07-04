@@ -1,7 +1,7 @@
 package wiki.test;
 
-import wiki.thk.RecallProblem;
 import org.junit.Test;
+import wiki.thk.RecallProblem;
 
 public class ThkTest {
 

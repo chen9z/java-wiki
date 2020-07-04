@@ -1,6 +1,8 @@
 import org.junit.Test;
+import wiki.thk.Color;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -43,6 +45,6 @@ public class CollectionDemo {
 
     @Test
     public void func3() {
-
+        Arrays.stream(Color.values()).forEach(System.out::println);
     }
 }
