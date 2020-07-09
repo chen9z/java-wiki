@@ -5,11 +5,23 @@ package wiki.reflect;
  */
 public class Student {
 
-    private final String name;
+    private  String name;
+
+    static {
+        System.out.println("静态代码执行了");
+    }
+
+    {
+        System.out.println("构造代码块执行了");
+    }
+
+    public  Student() {
+        System.out.println("无参构造方法执行了");
+    }
 
     public  Student(String name) {
-        this.name = name;
-        System.out.println(name);
+        this.name = "晓明";
+        System.out.println("带参构造方法执行了");
     }
 
     public void hello() {
@@ -18,5 +30,6 @@ public class Student {
     private void hi(String kk) {
         System.out.println("hi world" + kk);
     }
+
 
 }
