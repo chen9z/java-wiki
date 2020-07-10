@@ -1,11 +1,11 @@
 import org.junit.Test;
+import wiki.reflect.Student;
 import wiki.thk.Color;
 
+import java.lang.ref.Reference;
+import java.lang.ref.SoftReference;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Created by chen on 2020/5/25.
@@ -29,7 +29,7 @@ public class CollectionDemo {
         System.out.println(map.toString());
     }
     @Test
-    public void fun2() {
+    public void fun2(){
         PriorityQueue<Integer> heap = new PriorityQueue<>(3,(o1, o2) -> o2-o1);
         heap.add(1);
         heap.add(2);
@@ -44,7 +44,16 @@ public class CollectionDemo {
     }
 
     @Test
-    public void func3() {
+    public void func3(){
         Arrays.stream(Color.values()).forEach(System.out::println);
+    }
+
+    @Test
+    public void func4() {
+        String ss = "3123412q4";
+        Integer integer = Integer.valueOf(new Integer(12));
+        Integer integer1 = new Integer(12);
+        System.out.println(integer==integer1);
+        System.out.println(Integer.toString(12));
     }
 }

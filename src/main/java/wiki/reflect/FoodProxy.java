@@ -3,7 +3,6 @@ package wiki.reflect;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Arrays;
 
 /**
  * Created by chen on 2020/7/8.
