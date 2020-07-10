@@ -40,7 +40,6 @@ public class CollectionDemo {
         heap.add(5);
         heap.add(5);
 
-
         System.out.println(heap.poll());
     }
 
