@@ -1,4 +1,5 @@
 import org.junit.Test;
+import wiki.jvm.CGLibOOM;
 import wiki.reflect.Student;
 import wiki.thk.Color;
 
