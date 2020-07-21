@@ -7,6 +7,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created by chen on 2020/5/25.
@@ -51,10 +52,10 @@ public class CollectionDemo {
 
     @Test
     public void func4() {
-        String ss = "3123412q4";
-        Integer integer = Integer.valueOf(new Integer(12));
-        Integer integer1 = new Integer(12);
-        System.out.println(integer==integer1);
-        System.out.println(Integer.toString(12));
+        List<String> list = List.of("1", "2", "3");
+        list.add("4");
+        list.forEach(System.out::println);
+
+        List<Object> objects = Collections.synchronizedList(new ArrayList<>());
     }
 }
