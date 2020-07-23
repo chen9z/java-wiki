@@ -1,5 +1,8 @@
 package wiki.thread;
 
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 /**
  * Created by chen on 2020/6/29.
  */
@@ -18,6 +21,7 @@ public class SynchronizedTest {
     }
 
     public static void main(String[] args) {
+        ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
         SynchronizedTest test = new SynchronizedTest();
         Thread thread1=new Thread(test::one);
         Thread thread2=new Thread(test::two);
