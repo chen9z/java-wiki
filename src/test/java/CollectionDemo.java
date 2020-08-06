@@ -7,7 +7,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.*;
 
 /**
  * Created by chen on 2020/5/25.
@@ -57,5 +57,9 @@ public class CollectionDemo {
         list.forEach(System.out::println);
 
         List<Object> objects = Collections.synchronizedList(new ArrayList<>());
+    }
+
+    @Test
+    public void func5() {
     }
 }
